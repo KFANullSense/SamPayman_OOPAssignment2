@@ -2,7 +2,7 @@
 
 using System;
 
-namespace CMP1903_A1_2324
+namespace OOPAssignment2
 {
     internal class Die
     {
