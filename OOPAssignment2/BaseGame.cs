@@ -10,6 +10,8 @@ namespace OOPAssignment2
     {
         public string ReturnGameType();
         public void PlayGame();
+        public int[] GameTurn(int numToRoll);
+        public void SetTestState(bool testState);
     }
 
     abstract class BaseGame : IPlayableGame
@@ -21,13 +23,26 @@ namespace OOPAssignment2
         protected int _player1Score = 0;
         protected int _player2Score = 0;
 
+        protected bool IsTesting = false;
+
         public virtual string ReturnGameType()
         {
             return _gameType;
         }
 
+        public virtual void SetTestState(bool testState)
+        {
+            IsTesting = testState;
+        }
+
         public void PlayGame()
         {
+            if (IsTesting)
+            {
+                PlayCPU();
+                return;
+            }
+
             Console.Clear();
 
             bool shouldLoop = true;

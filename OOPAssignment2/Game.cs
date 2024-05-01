@@ -2,11 +2,12 @@
 {
     internal class Game
     {
-        IPlayableGame currentGame = new SevensOut();
+        public IPlayableGame CurrentGame = new SevensOut();
 
         static void Main(string[] args)
         {
             Statistics.ValidateStatsFile();
+            Testing.ValidateTestingFile();
 
             Game localGame = new Game();
             localGame.MainMenu();
@@ -26,7 +27,7 @@
 
             while (programShouldRun)
             {
-                Console.WriteLine($"Menu Options:\n1) Play Game\n2) Switch Mode (Current Mode: {currentGame.ReturnGameType()})\n3) Check Stats\n4) Perform Tests\n5) Exit Program\n");
+                Console.WriteLine($"Menu Options:\n1) Play Game\n2) Switch Mode (Current Mode: {CurrentGame.ReturnGameType()})\n3) Check Stats\n4) Perform Tests\n5) Exit Program\n");
 
                 var userInput = Console.ReadLine();
                 int i = 0;
@@ -38,33 +39,33 @@
                         switch (i)
                         {
                             case 1:
-                                currentGame.PlayGame();
-                                Statistics.AddPlays(currentGame.ReturnGameType(), 1);
+                                CurrentGame.PlayGame();
+                                Statistics.AddPlays(CurrentGame.ReturnGameType(), 1);
 
-                                if (currentGame.ReturnGameType() == "ThreeOrMore")
+                                if (CurrentGame.ReturnGameType() == "ThreeOrMore")
                                 {
-                                    currentGame = new ThreeOrMore();
+                                    CurrentGame = new ThreeOrMore();
                                 }
                                 else
                                 {
-                                    currentGame = new SevensOut();
+                                    CurrentGame = new SevensOut();
                                 }
 
                                 break;
                             case 2:
-                                if (currentGame.ReturnGameType() == "ThreeOrMore")
+                                if (CurrentGame.ReturnGameType() == "ThreeOrMore")
                                 {
-                                    currentGame = new SevensOut();
+                                    CurrentGame = new SevensOut();
                                 } else
                                 {
-                                    currentGame = new ThreeOrMore();
+                                    CurrentGame = new ThreeOrMore();
                                 }
                                 break;
                             case 3:
                                 Statistics.PrintStatistics();
                                 break;
                             case 4:
-                                //perform tests
+                                Testing.PerformTests();
                                 break;
                             case 5:
                                 Console.WriteLine("Exiting program...");
