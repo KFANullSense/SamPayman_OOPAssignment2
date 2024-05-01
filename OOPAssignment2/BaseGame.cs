@@ -30,7 +30,7 @@ namespace OOPAssignment2
             return _gameType;
         }
 
-        public virtual void SetTestState(bool testState)
+        public void SetTestState(bool testState)
         {
             IsTesting = testState;
         }
